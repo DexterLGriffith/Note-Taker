@@ -29,7 +29,7 @@ app.delete('/api/notes/:id', (req, res) => {
     const newNote = []; 
     newNote = readFile;
     const getID = req.params.id; 
-    newNote = newNote.filter(({ id })) => id !== getID;
+    newNote = newNote.filter(({ id }) => id !== getID);
     res.JSON(newNote)
     fs.writeFileSync('db/db.json', JSON.stringify(readFile));
 })

@@ -24,6 +24,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = {title: req.body.tile,text: req.body.text, id: nanoid()};
     readFile.push(newNote);
     fs.writeFileSync('db/db.json', JSON.stringify(readFile));
+    res.json(readFile);
 });
 app.delete('/api/notes/:id', (req, res) => {
     let readFile = JSON.parse(fs.readFileSync('db/db.json',{encoding: 'utf-8'}));

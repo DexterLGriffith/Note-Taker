@@ -21,7 +21,8 @@ app.get('/api/notes', (req, res) => {
 });
 app.post('/api/notes', (req, res) => {
     const readFile = JSON.parse(fs.readFileSync('db/db.json',{encoding: 'utf-8'}));
-    const newNote = {title: req.body.tile,text: req.body.text, id: nanoid()};
+    const newNote = req.body
+    newNote.id = nanoid();
     readFile.push(newNote);
     fs.writeFileSync('db/db.json', JSON.stringify(readFile));
     res.json(readFile);
@@ -34,7 +35,7 @@ app.delete('/api/notes/:id', (req, res) => {
     newNote = newNote.filter(({ id }) => id !== getID);
     res.json(newNote)
     fs.writeFileSync('db/db.json', JSON.stringify(readFile));
-})
+});
 //htmlgetroutes
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
